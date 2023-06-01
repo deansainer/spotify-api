@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify platlist</title>
+</head>
+{% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="nav_icon">
+      <a href="http://127.0.0.1:8000/"><img src="https://www.citypng.com/public/uploads/small/11661570403whwxybsmx9s49gydvycyvydsof4sqok0xk0cisomyqi9tvzojomgsfwp1ffra1pqt5ndii64wnwpzmkqsvjr7wkuh3fpukvy2eki.png" width="50" height="50" ></a>
+  </div>
+</nav>
+<div class="playlist">
+  <div class="rounded-border">
+  <br>
+    <div class="image">
+<img src="https://www.linkpicture.com/q/spotify_logo.png" alt="Lamp" width="270" height="80">
+      </div>
+      <form class="form-inline" method="get">
+        <input class="form-control" style="width: 75%;" name="uri" placeholder="Enter playlist URI">
+    <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
+      <br>
+<table class="table">
+  <tbody>
+  {% for track in track_list%}
+    <tr>
+        <td><img src="{{track.image}}" height="35px" width="35px"></td>
+        <td>{{track.artist_name}}</td>
+        <td>{{track.track_name}}</td>
+           <td><a href="{{track.link}}"><img src="https://i.ibb.co/rdnMR51/play-button.png" width="25px" height="25px"></a> </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
