@@ -13,5 +13,6 @@ Example of URI, nested in a playlist link:
 
 ## Installation
 
-bash
+```bash
 pip install spotipy
+```
