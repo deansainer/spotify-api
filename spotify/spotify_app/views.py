@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import spotipy
+import re
 from django.shortcuts import render
 from spotipy.oauth2 import SpotifyClientCredentials
 from .forms import *
@@ -24,7 +25,9 @@ class Track:
 
 
 def index(request):
-    uri = request.GET.get('uri', '79fSyJxu80fIKCHJVPBJAF')
+    uri = request.GET.get('uri', 'https://open.spotify.com/playlist/35Ux8wZHG7balGjo2Zc2Uz?si=14aaa88059e14a40')
+    uri = re.findall(r"\/playlist\/(\w+)", uri)
+    uri = uri[0]
     items = session.playlist_tracks(uri)["items"]
     form = UriForm()
 
