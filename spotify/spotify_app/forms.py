@@ -10,5 +10,4 @@ class UriForm(ModelForm):
             'class': 'form-control',
             'uri': 'uri',
             'id': 'uri',
-            'placeholder': 'Enter uri'
         })}
