@@ -18,11 +18,8 @@
 <div class="playlist">
   <div class="rounded-border">
   <br>
-    <div class="image">
-<img src="https://www.linkpicture.com/q/spotify_logo.png" alt="Lamp" width="270" height="80">
-      </div>
       <form class="form-inline" method="get">
-        <input class="form-control" style="width: 75%;" name="uri" placeholder="Enter playlist URL">
+        <input class="form-control" style="width: 85%;" name="uri" placeholder="Enter playlist URL">
     <button class="btn btn-dark" type="submit">Submit</button>
         </form>
       <br>
@@ -30,13 +27,39 @@
   <tbody>
   {% for track in track_list%}
     <tr>
+        <div class="ss">
         <td><img src="{{track.image}}" height="35px" width="35px"></td>
         <td>{{track.artist_name}}</td>
         <td>{{track.track_name}}</td>
-           <td><a href="{{track.preview}}"><img src="https://i.ibb.co/rdnMR51/play-button.png" width="25px" height="25px"></a> </td>
+            </div>
+        <td>
+        <audio id="audioPlayer" controls>
+        <source src="{{track.preview}}" type="audio/mpeg">
+    </audio>
+        </td>
+
+           <td><a href="{{track.link}}"><div class="spotify_logo"><img src="https://i.ibb.co/VL0HsyS/link.png" width="32px" height="32px"></div></a> </td>
+
     </tr>
   {% endfor %}
   </tbody>
 </table>
 </div>
 </div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Song Player</title>
+</head>
+<body>
+
+
+    <script>
+        function playSong() {
+            var audio = document.getElementById("audioPlayer");
+            audio.play();
+        }
+    </script>
+</body>
+</html>

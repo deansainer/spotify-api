@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 import spotipy
 import re
@@ -42,6 +43,5 @@ def index(request):
         preview = item["track"]["preview_url"]
         track = Track(track_name, artist_name, link, image, preview)
         track_list.append(track)
-
     context = {'track_list': track_list, 'form': form}
     return render(request, 'spotify_app/index.html', context)

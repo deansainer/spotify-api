@@ -1,18 +1,17 @@
 .playlist {
-  width: 35%;
-  margin-left: 650px;
+  width: 50%;
+  margin-left: 450px;
   border-radius: 10px;
 }
 body{
   background-color: white;
 }
 form{
-  margin-top: 20px;
-  margin-left: 15px;
+  margin-left: 3px;
 
 }
 button{
-  margin-left: 30px;
+  margin-left: 50px;
 }
 .rounded-border {
   margin-top: 20px;
@@ -25,4 +24,7 @@ button{
 }
 .nav_icon{
   margin-left: 100px;
+}
+.spotify_logo{
+  margin-top: 12px;
 }
