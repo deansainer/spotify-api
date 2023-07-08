@@ -25,21 +25,20 @@
       <br>
 <table class="table">
   <tbody>
+
   {% for track in track_list%}
     <tr>
         <div class="ss">
         <td><img src="{{track.image}}" height="35px" width="35px"></td>
-        <td>{{track.artist_name}}</td>
-        <td>{{track.track_name}}</td>
+            <td><a href="{{track.artist_link}}" style="color: black">{{track.artist_name}}</a></td>
+        <td><a href="{{track.track_link}}" style="color:black">{{track.track_name}}</a></td>
             </div>
         <td>
         <audio id="audioPlayer" controls>
         <source src="{{track.preview}}" type="audio/mpeg">
     </audio>
         </td>
-
-           <td><a href="{{track.link}}"><div class="spotify_logo"><img src="https://i.ibb.co/VL0HsyS/link.png" width="32px" height="32px"></div></a> </td>
-
+           <td><a href="{{track.track_link}}"><div class="spotify_logo"><img src="https://i.ibb.co/VL0HsyS/link.png" width="32px" height="32px"></div></a> </td>
     </tr>
   {% endfor %}
   </tbody>

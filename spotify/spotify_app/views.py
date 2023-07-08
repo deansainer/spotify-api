@@ -18,12 +18,14 @@ session = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
 class Track:
-    def __init__(self, name, artist, link, image, preview):
+    def __init__(self, name, artist, track_link, image, preview, artist_link):
         self.track_name = name
         self.artist_name = artist
-        self.link = link
+        self.track_link = track_link
         self.image = image
         self.preview = preview
+        self.artist_link = artist_link
+
 
 
 def index(request):
@@ -38,10 +40,11 @@ def index(request):
     for item in items:
         track_name = item["track"]["name"]
         artist_name = item["track"]["artists"][0]["name"]
-        link = item["track"]["external_urls"]["spotify"]
+        artist_link = item['track']['artists'][0]['external_urls']['spotify']
+        track_link = item["track"]["external_urls"]["spotify"]
         image = item["track"]["album"]["images"][0]["url"]
         preview = item["track"]["preview_url"]
-        track = Track(track_name, artist_name, link, image, preview)
+        track = Track(track_name, artist_name, track_link, image, preview, artist_link)
         track_list.append(track)
     context = {'track_list': track_list, 'form': form}
     return render(request, 'spotify_app/index.html', context)
