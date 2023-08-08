@@ -45,7 +45,11 @@
 </table>
 </div>
 </div>
-
+{% if messages %}
+{% for message in messages %}
+<div class="error_message alert alert-danger" role="alert">{{message}}</div>
+{% endfor %}
+{% endif %}
 <!DOCTYPE html>
 <html>
 <head>

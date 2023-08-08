@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib import messages
 import spotipy
 import re
 from django.shortcuts import render
@@ -30,10 +31,7 @@ class Track:
 
 def index(request):
     try:
-        default_url = 'https://open.spotify.com/playlist/35Ux8wZHG7balGjo2Zc2Uz?si=96bd3a09905f4dc0'
-        uri = request.GET.get('uri', default_url)
-        if uri == '':
-            uri = default_url
+        uri = request.GET.get('uri', '')
         uri = re.findall(r"\/playlist\/(\w+)", uri)
         uri = uri[0]
         items = session.playlist_tracks(uri)["items"]
@@ -53,4 +51,5 @@ def index(request):
         context = {'track_list': track_list, 'form': form}
         return render(request, 'spotify_app/index.html', context)
     except IndexError:
+        messages.warning(request, 'Playlist not found or URL not specified.')
         return render(request, 'spotify_app/index.html')
