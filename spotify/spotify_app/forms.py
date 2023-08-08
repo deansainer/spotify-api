@@ -1,13 +1,12 @@
 from .models import *
 from django.forms import ModelForm, TextInput
+from django import forms
 
-
-class UriForm(ModelForm):
+class UriForm(forms.ModelForm):
     class Meta:
         model = Uri
         fields = ['uri']
-        widgets = {'uri': TextInput(attrs={
+        widgets = {'uri': forms.TextInput(attrs={
             'class': 'form-control',
-            'uri': 'uri',
             'id': 'uri',
         })}

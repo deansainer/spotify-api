@@ -29,22 +29,28 @@ class Track:
 
 
 def index(request):
-    uri = request.GET.get('uri', 'https://open.spotify.com/playlist/35Ux8wZHG7balGjo2Zc2Uz?si=96bd3a09905f4dc0')
-    uri = re.findall(r"\/playlist\/(\w+)", uri)
-    uri = uri[0]
-    items = session.playlist_tracks(uri)["items"]
-    form = UriForm()
+    try:
+        default_url = 'https://open.spotify.com/playlist/35Ux8wZHG7balGjo2Zc2Uz?si=96bd3a09905f4dc0'
+        uri = request.GET.get('uri', default_url)
+        if uri == '':
+            uri = default_url
+        uri = re.findall(r"\/playlist\/(\w+)", uri)
+        uri = uri[0]
+        items = session.playlist_tracks(uri)["items"]
+        form = UriForm()
 
-    track_list = []
+        track_list = []
 
-    for item in items:
-        track_name = item["track"]["name"]
-        artist_name = item["track"]["artists"][0]["name"]
-        artist_link = item['track']['artists'][0]['external_urls']['spotify']
-        track_link = item["track"]["external_urls"]["spotify"]
-        image = item["track"]["album"]["images"][0]["url"]
-        preview = item["track"]["preview_url"]
-        track = Track(track_name, artist_name, track_link, image, preview, artist_link)
-        track_list.append(track)
-    context = {'track_list': track_list, 'form': form}
-    return render(request, 'spotify_app/index.html', context)
+        for item in items:
+            track_name = item["track"]["name"]
+            artist_name = item["track"]["artists"][0]["name"]
+            artist_link = item['track']['artists'][0]['external_urls']['spotify']
+            track_link = item["track"]["external_urls"]["spotify"]
+            image = item["track"]["album"]["images"][0]["url"]
+            preview = item["track"]["preview_url"]
+            track = Track(track_name, artist_name, track_link, image, preview, artist_link)
+            track_list.append(track)
+        context = {'track_list': track_list, 'form': form}
+        return render(request, 'spotify_app/index.html', context)
+    except IndexError:
+        return render(request, 'spotify_app/index.html')
